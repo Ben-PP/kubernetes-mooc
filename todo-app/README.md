@@ -7,7 +7,7 @@ This is the course project.
 ### Manifests
 To deploy with manifest use below command.
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.4/todo-app/manifests/deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.5/todo-app/manifests/deployment.yaml
 ```
 
 ### Manually
