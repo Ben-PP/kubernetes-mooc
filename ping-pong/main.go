@@ -10,6 +10,9 @@ import (
 func main() {
   counter := 0
   router := gin.Default()
+  router.GET("/", func(c *gin.Context) {
+	  c.JSON(http.StatusOK, gin.H{"name": "ping-pong app"})
+  })
   router.GET("/pingpong", func(c *gin.Context) {
 	  htmlContent := fmt.Sprintf("<html><body><h1>pong %d</h1></body></html>", counter)
 	  c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(htmlContent))

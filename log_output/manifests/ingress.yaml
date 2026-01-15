@@ -7,13 +7,13 @@ spec:
   - http:
       paths:
       - path: /
-        pathType: Prefix
+        pathType: Exact
         backend:
           service:
             name: log-output-svc
             port:
               number: 2345
-      - path: /ping-pong
+      - path: /pingpong
         pathType: Prefix
         backend:
           service:
