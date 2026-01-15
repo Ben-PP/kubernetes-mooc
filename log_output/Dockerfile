@@ -1,5 +1,7 @@
-FROM python:3.14-alpine
+FROM golang:1.25-alpine
 WORKDIR /app
-COPY . .
-CMD ["python", "-u", "main.py"]
+COPY go.mod go.sum main.go .
+RUN go get .
+RUN go build -o log_output .
+CMD ["./log_output"]
 
