@@ -12,3 +12,4 @@ Chapter 2
 - [1.4](https://github.com/Ben-PP/kubernetes-mooc/tree/1.4/todo-app)
 - [1.5](https://github.com/Ben-PP/kubernetes-mooc/tree/1.5/todo-app)
 - [1.6](https://github.com/Ben-PP/kubernetes-mooc/tree/1.6/todo-app)
+- [1.7](https://github.com/Ben-PP/kubernetes-mooc/tree/1.7/log_output)
