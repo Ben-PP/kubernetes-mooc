@@ -7,12 +7,12 @@ This is the course project.
 ### Manifests
 To deploy with manifest use below command.
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.6/todo-app/manifests/deployment.yaml
-```
+# Apply deployment
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.8/todo-app/manifests/deployment.yaml
 
-### Manually
-To deploy manually with k3d use the command below.
+# Apply service
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.8/todo-app/manifests/service.yaml
 
-```bash
-kubectl create deployment todo-app --image=benpp/todo-app:1.2
+# Apply ingress
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.8/todo-app/manifests/ingress.yaml
 ```
