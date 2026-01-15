@@ -6,7 +6,14 @@ Simple app outputting text.
 
 ### With manifests
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests
+# Deployment
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/deployment.yaml
+
+# Service
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/service.yaml
+
+# Ingress
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/ingress.yaml
 ```
 
 ### With kubectl
