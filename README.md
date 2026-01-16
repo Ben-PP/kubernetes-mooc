@@ -17,3 +17,4 @@ Chapter 2
 - 1.9
     - [ping-pong](https://github.com/Ben-PP/kubernetes-mooc/tree/1.9/ping-pong)
     - [log_output ingress](https://github.com/Ben-PP/kubernetes-mooc/tree/1.9/log_output/manifests)
+- [1.10](https://github.com/Ben-PP/kubernetes-mooc/tree/1.10/log_output)

@@ -1,23 +1,14 @@
 # Log output app
+This project contains 2 small apps. [log-writer](./log-writer) writes timestamps to a log file while [log-server](./log-server) reads the log file and serves it.
 
-Simple app outputting text.
-
-## Kubernetes
-
-### With manifests
+## Deploy
+To deploy these apps use below commands.
 ```bash
 # Deployment
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.10/log_output/manifests/deployment.yaml
 
 # Service
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/service.yaml
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.10/log_output/manifests/service.yaml
 
 # Ingress
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.7/log_output/manifests/ingress.yaml
-```
-
-### With kubectl
-To deploy with k3d used in the course use below command.
-```bash
-kubectl create deployment log-output --image=benpp/log_output:1.1
-```
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/1.10/log_output/manifests/ingress.yaml

@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: log-output-volume
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: benpp/log_output:1.7
+        - name: log-writer
+          image: benpp/log-writer:1.10
+          volumeMounts:
+            - name: log-output-volume
+              mountPath: /app/logs
+        - name: log-server
+          image: benpp/log-server:1.10
+          volumeMounts:
+            - name: log-output-volume
+              mountPath: /app/logs
