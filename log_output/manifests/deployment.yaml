@@ -13,16 +13,17 @@ spec:
         app: log-output
     spec:
       volumes:
-        - name: log-output-volume
-          emptyDir: {}
+        - name: logs-dir
+          persistentVolumeClaim:
+            claimName: log-output-claim
       containers:
         - name: log-writer
           image: benpp/log-writer:1.10
           volumeMounts:
-            - name: log-output-volume
+            - name: logs-dir
               mountPath: /app/logs
         - name: log-server
-          image: benpp/log-server:1.10
+          image: benpp/log-server:1.11
           volumeMounts:
-            - name: log-output-volume
+            - name: logs-dir
               mountPath: /app/logs

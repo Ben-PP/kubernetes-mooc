@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -23,7 +24,19 @@ func main() {
 			logsString = fmt.Sprintf("There was error getting logs: %s", err)
 		}
 		logsString = string(logs)
-		htmlContent := fmt.Sprintf("<html><body><h1>Logs</h1><span style=\"white-space: pre-line\">%s</span></body></html>", logsString)
+		pongString := ""
+		pongs, err := os.ReadFile(fmt.Sprintf("%s/pongs.log", logDir))
+		if err != nil {
+			if errors.Is(err, os.ErrNotExist) {
+				pongString = "Could not find pongs.log file"
+			} else {
+				pongString = fmt.Sprintf("There was error reading pong count: %s", err)
+			}
+		}
+		if pongString == "" {
+			pongString = string(pongs)
+		}
+		htmlContent := fmt.Sprintf("<html><body><h1>Logs</h1><span style=\"white-space: pre-line\">%s</span><h1>Ping-pong count</h1><p>%s</p></body></html>", logsString, pongString)
 		c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(htmlContent))
 	})
 	router.Run()

@@ -1,6 +1,6 @@
 # Log output app
 
-Simple web server to output a log file.
+Simple web server to output a log file and pong count.
 
 ## Kubernetes
 
