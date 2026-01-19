@@ -22,3 +22,6 @@ Chapter 2
     - [ping-pong](https://github.com/Ben-PP/kubernetes-mooc/tree/1.11/ping-pong)
     - [log_output](https://github.com/Ben-PP/kubernetes-mooc/tree/1.11/log_output/manifests)
     - [persistent volumes](https://github.com/Ben-PP/kubernetes-mooc/tree/1.11/volume-configs)
+- 1.12
+    - [todo-app](https://github.com/Ben-PP/kubernetes-mooc/tree/1.12/todo-app)
+    - [persistent volumes](https://github.com/Ben-PP/kubernetes-mooc/tree/1.12/volume-configs)

@@ -12,9 +12,19 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: todo-volume
+          persistentVolumeClaim:
+            claimName: todo-claim
       containers:
         - name: todo-app
-          image: benpp/todo-app:1.5
+          image: benpp/todo-app:1.12
+          imagePullPolicy: Always
           env:
             - name: PORT
               value: "8000"
+            - name: DATA_DIR
+              value: "/app/data"
+          volumeMounts:
+            - name: todo-volume
+              mountPath: /app/data
