@@ -1,9 +1,24 @@
 {{ define "index.tmpl" }}
+	
 <html>
-<body>
-<h1>The project App</h1>
-<img src="{{ .ImageURI }}" alt="Embedded picture">
-<p>DevOps with Kubernetes 2025</p>
-</body>
+	<head>
+		<style>
+			img { max-width:500px; height:auto; }
+		</style>
+	</head>
+	<body>
+		<h1>The project App</h1>
+		<img src="{{ .ImageURI }}" alt="Embedded picture">
+		<form action="" method="POST" novalidate>
+			<input type="text" id="todo-content" name="todo-content" maxlength="140">
+			<button type="submit">Create todo</button>
+		</form>
+		<ul>
+			{{ range .Todos }}
+				<li>{{ . }}</li>
+			{{ end }}
+		</ul>
+		<p>DevOps with Kubernetes 2025</p>
+	</body>
 </html>
 {{ end }}

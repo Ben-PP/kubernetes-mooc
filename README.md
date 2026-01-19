@@ -25,3 +25,6 @@ Chapter 2
 - 1.12
     - [todo-app](https://github.com/Ben-PP/kubernetes-mooc/tree/1.12/todo-app)
     - [persistent volumes](https://github.com/Ben-PP/kubernetes-mooc/tree/1.12/volume-configs)
+- 1.13
+    - [todo-app](https://github.com/Ben-PP/kubernetes-mooc/tree/1.13/todo-app)
+    - [persistent volumes](https://github.com/Ben-PP/kubernetes-mooc/tree/1.13/volume-configs)

@@ -18,7 +18,7 @@ spec:
             claimName: todo-claim
       containers:
         - name: todo-app
-          image: benpp/todo-app:1.12
+          image: benpp/todo-app:1.13
           imagePullPolicy: Always
           env:
             - name: PORT
