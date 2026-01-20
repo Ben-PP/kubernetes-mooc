@@ -4,7 +4,7 @@ Repo for DevOps with Kubernetes course from University of Helsinki MOOC course.
 
 ## Exercises
 
-Chapter 2
+## Chapter 2
 
 - [1.1](https://github.com/Ben-PP/kubernetes-mooc/tree/1.1/log_output)
 - [1.2](https://github.com/Ben-PP/kubernetes-mooc/tree/1.2/todo-app)
@@ -28,6 +28,7 @@ Chapter 2
 - 1.13
     - [todo-app](https://github.com/Ben-PP/kubernetes-mooc/tree/1.13/todo-app)
     - [persistent volumes](https://github.com/Ben-PP/kubernetes-mooc/tree/1.13/volume-configs)
+## Chapter 3
 - 2.1
     - [ping-pong](https://github.com/Ben-PP/kubernetes-mooc/tree/2.1/ping-pong)
     - [log_output](https://github.com/Ben-PP/kubernetes-mooc/tree/2.1/log_output/manifests)
