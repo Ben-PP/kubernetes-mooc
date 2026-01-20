@@ -9,10 +9,35 @@
 	<body>
 		<h1>The project App</h1>
 		<img src="{{ .ImageURI }}" alt="Embedded picture">
-		<form action="" method="POST" novalidate>
-			<input type="text" id="todo-content" name="todo-content" maxlength="140">
+		<form id="todo-form" action="{{ .TodoBackendURL }}/todos" method="POST" novalidate>
+			<input type="text" id="todo-content" name="todo" maxlength="140">
 			<button type="submit">Create todo</button>
 		</form>
+		<script>
+		const form = document.getElementById('todo-form')
+		form.addEventListener('submit', async function (e) {
+			e.preventDefault()
+			const formData = new FormData(form)
+			const urlEncoded = new URLSearchParams()
+			for (const [key, value] of formData.entries()) {
+				urlEncoded.append(key, value)
+			}
+			try {
+				const resp = await fetch('{{ .TodoBackendURL }}/todos', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+					},
+					body: urlEncoded.toString()
+				})
+				if (resp.ok) {
+					location.reload()
+				}
+			} catch (err) {
+				// Should probably do something here :D
+			}
+		})
+		</script>
 		<ul>
 			{{ range .Todos }}
 				<li>{{ . }}</li>

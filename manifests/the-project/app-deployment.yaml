@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+        - name: todo-volume
+          persistentVolumeClaim:
+            claimName: todo-claim
+      containers:
+        - name: todo-app
+          image: benpp/todo-app:2.2
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "8000"
+            - name: DATA_DIR
+              value: "/app/data"
+            - name: TODOBACKEND_URL
+              value: "http://devops.dmz:8081"
+          volumeMounts:
+            - name: todo-volume
+              mountPath: /app/data
