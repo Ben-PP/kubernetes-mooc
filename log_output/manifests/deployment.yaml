@@ -23,7 +23,10 @@ spec:
             - name: logs-dir
               mountPath: /app/logs
         - name: log-server
-          image: benpp/log-server:1.11
+          image: benpp/log-server:2.1
+          env:
+            - name: PINGPONG_URL
+              value: "http://ping-pong-svc:2345"
           volumeMounts:
             - name: logs-dir
               mountPath: /app/logs

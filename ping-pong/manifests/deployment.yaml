@@ -12,13 +12,6 @@ spec:
       labels:
         app: ping-pong
     spec:
-      volumes:
-        - name: pingpong-volume
-          persistentVolumeClaim:
-            claimName: pingpong-claim
       containers:
         - name: ping-pong
-          image: benpp/ping-pong:1.11
-          volumeMounts:
-            - name: pingpong-volume
-              mountPath: /app/logs
+          image: benpp/ping-pong:2.1

@@ -1,0 +1,11 @@
+{{ define "index.tmpl" }}
+<html>
+	<body>
+		<h1>Logs</h1>
+		<span style="white-space: pre-line">
+			{{ .Logs }}
+		</span>
+		<h1> Ping-pong count: {{ .Pings }}</h1>
+	</body>
+</html>
+{{ end }}

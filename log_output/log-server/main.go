@@ -1,13 +1,18 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"log-server/pingpong"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
+
+type IndexPageData struct {
+	Logs	string
+	Pings	string
+}
 
 func main() {
 	logDir := os.Getenv("LOG_DIR")
@@ -15,8 +20,16 @@ func main() {
 		logDir = "./logs"
 	}
 	fmt.Printf("LOG_DIR: %s\n", logDir)
+	pingpongURL := os.Getenv("PINGPONG_URL")
+	if pingpongURL == "" {
+		panic("PINGPONG_URL can not be empty")
+	}
+	fmt.Printf("PINGPONG_URL: %s\n", pingpongURL)
+
+	pongClient := pingpong.New(pingpongURL)
 
 	router := gin.Default()
+	router.LoadHTMLGlob("templates/*.tmpl")
 	router.GET("/", func(c *gin.Context) {
 		logsString := ""
 		logs, err := os.ReadFile(fmt.Sprintf("%s/timestamps.log", logDir))
@@ -25,19 +38,18 @@ func main() {
 		}
 		logsString = string(logs)
 		pongString := ""
-		pongs, err := os.ReadFile(fmt.Sprintf("%s/pongs.log", logDir))
+		pongs, err := pongClient.Pings()
 		if err != nil {
-			if errors.Is(err, os.ErrNotExist) {
-				pongString = "Could not find pongs.log file"
-			} else {
-				pongString = fmt.Sprintf("There was error reading pong count: %s", err)
-			}
+			pongString = fmt.Sprintf("There was error getting pong count: %s", err)
 		}
 		if pongString == "" {
-			pongString = string(pongs)
+			pongString = fmt.Sprintf("%d", pongs)
 		}
-		htmlContent := fmt.Sprintf("<html><body><h1>Logs</h1><span style=\"white-space: pre-line\">%s</span><h1>Ping-pong count</h1><p>%s</p></body></html>", logsString, pongString)
-		c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(htmlContent))
+		data := IndexPageData{
+			Logs: logsString,
+			Pings: pongString,
+		}
+		c.HTML(http.StatusOK, "index.tmpl", data)
 	})
 	router.Run()
 }

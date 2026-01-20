@@ -1,4 +1,4 @@
-module log_output
+module log-server
 
 go 1.25.5
 
