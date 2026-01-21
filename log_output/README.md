@@ -7,6 +7,7 @@ Log writer needs 2 env variables provided in the `deploy.yaml` or by the contain
 | :--: | :--: | :--- |
 | LOG_DIR | `/app/log` | Where the `timestamps.log` file is put. |
 | PINGPONG_URL | `http://example.com:8000` | Url where the pingpong app is listening |
+| MESSAGE | `this is message` | Message to be shown in the page. |
 
 ## Deploy
 To deploy these apps use below commands.

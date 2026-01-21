@@ -10,8 +10,18 @@ import (
 )
 
 type IndexPageData struct {
-	Logs	string
-	Pings	string
+	EnvVariable	string
+	FileContent	string
+	Logs		string
+	Pings		string
+}
+
+func readFile(path string) (string, error) {
+	content, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	return string(content), nil
 }
 
 func main() {
@@ -32,11 +42,11 @@ func main() {
 	router.LoadHTMLGlob("templates/*.tmpl")
 	router.GET("/", func(c *gin.Context) {
 		logsString := ""
-		logs, err := os.ReadFile(fmt.Sprintf("%s/timestamps.log", logDir))
+		logs, err := readFile(fmt.Sprintf("%s/timestamps.log", logDir))
 		if err != nil {
 			logsString = fmt.Sprintf("There was error getting logs: %s", err)
 		}
-		logsString = string(logs)
+		logsString = logs
 		pongString := ""
 		pongs, err := pongClient.Pings()
 		if err != nil {
@@ -45,7 +55,13 @@ func main() {
 		if pongString == "" {
 			pongString = fmt.Sprintf("%d", pongs)
 		}
+		fileContent, err := readFile("./data/information.txt")
+		if err != nil {
+			fileContent = fmt.Sprintf("Error reading information.txt: %s", err)
+		}
 		data := IndexPageData{
+			EnvVariable: os.Getenv("MESSAGE"),
+			FileContent: fileContent,
 			Logs: logsString,
 			Pings: pongString,
 		}

@@ -1,6 +1,9 @@
 {{ define "index.tmpl" }}
 <html>
 	<body>
+		<h1>Configs</h1>
+		<p>file content: {{ .FileContent }}</p>
+		<p>env variable: {{ .EnvVariable }}</p>
 		<h1>Logs</h1>
 		<span style="white-space: pre-line">
 			{{ .Logs }}

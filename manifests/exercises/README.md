@@ -2,7 +2,7 @@
 Here are the manifests of the ping-pong app and the logging app.
 
 ## Environment
-There is `PINGPONG_URL` env variable defined in the `log-deployment.yaml`. You should not need to modify it.
+There is `PINGPONG_URL` env variable defined in the `log-deployment.yaml`. You should not need to modify it. Also variable `MESSAGE` is set in the `log-config-map.yaml`.
 
 ## Deployment
 ```bash
