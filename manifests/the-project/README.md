@@ -7,7 +7,7 @@ There is `TODOBACKEND_URL` env variable defined in the `app-deployment.yaml` whi
 ## Deployment
 ```bash
 # Create namespace if needed
-kubectl apply -f https://githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.4/manifests/namespaces/project.yaml
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.4/manifests/namespaces/project.yaml
 
 # Apply manifests
 kubectl apply -f .
