@@ -17,3 +17,6 @@ spec:
         - name: todo-backend
           image: benpp/todo-backend:2.2
           imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: 8080
