@@ -7,7 +7,7 @@ There is `PINGPONG_URL` env variable defined in the `log-deployment.yaml`. You s
 ## Deployment
 ```bash
 # Create namespace if not created
-kubectl apply -f namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.4.1/manifests/namespaces/exercises.yaml
 
 # Apply the rest of the files
 kubectl apply -f .
