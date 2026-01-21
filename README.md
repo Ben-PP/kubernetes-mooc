@@ -33,3 +33,4 @@ Repo for DevOps with Kubernetes course from University of Helsinki MOOC course.
     - [ping-pong](https://github.com/Ben-PP/kubernetes-mooc/tree/2.1/ping-pong)
     - [log_output](https://github.com/Ben-PP/kubernetes-mooc/tree/2.1/log_output/manifests)
 - [2.2](https://github.com/Ben-PP/kubernetes-mooc/tree/2.2/manifests/the-project)
+- [2.3](https://github.com/Ben-PP/kubernetes-mooc/tree/2.3/manifests/exercises)
