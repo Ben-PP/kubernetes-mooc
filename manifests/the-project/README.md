@@ -4,13 +4,17 @@ Here are the manifests of the course project
 ## Environment
 There is `TODOBACKEND_URL` env variable defined in the `app-deployment.yaml` which you will have to modify to match your set up. This is the url to which the app makes the GET request for todos and to which browser sends POST requests to create todos.
 
-## Deployment
-```bash
-# Create namespace if needed
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.4/manifests/namespaces/project.yaml
+### Secrets
+The secrets.enc.yaml contains the postgres password and is encrypted with sops.
 
-# Apply manifests
-kubectl apply -f .
+## Deployment
+To deploy, you can use the `kubeapply.sh` script. Give the AGE key file as a parameter for it.
+```bash
+./kubeapply <path/to/key.txt>
+```
+To delete all configurations except for the namespace you can also use the `kubeapply`.
+```bash
+./kubeapply -d
 ```
 
 ## Applications
