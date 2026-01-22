@@ -1,15 +1,12 @@
 # Ping-pong app
 Small web server that responds with pong and a counter value.
 
+## Environment
+| Name | Example | Description |
+| :--: | :--: | :--- |
+| `POSTGRES_HOST` | `example.com` | Hostname or ip address of the postgres db. |
+| `POSTGRES_PORT` | `5432` | Port where the db is running. Defaults to `5432`. |
+| `POSTGRES_PASSWORD` | `supersecretpassword` | Password of the postgres user. |
+
 ## Deployment
-To deploy this app use below command.
-```bash
-# Apply deployment
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.1/ping-pong/manifests/deployment.yaml
-
-# Apply service
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.1/ping-pong/manifests/service.yaml
-
-# Apply ingress
-kubectl apply -f https://raw.githubusercontent.com/Ben-PP/kubernetes-mooc/refs/tags/2.1/log_output/manifests/ingress.yaml
-```
+To deploy, checkout the [manifests](https://github.com/Ben-PP/kubernetes-mooc/tree/2.7/manifests/exercises).

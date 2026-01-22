@@ -15,4 +15,11 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: benpp/ping-pong:2.1
+          image: benpp/ping-pong:2.7
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "supersecretpassword"
+            - name: POSTGRES_HOST
+              value: "postgres-svc"
+            - name: POSTGRES_PORT
+              value: "5432"
