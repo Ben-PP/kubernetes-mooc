@@ -12,13 +12,28 @@ To deploy, you can use the `kubeapply.sh` script. Give the AGE key file as a par
 ```bash
 ./kubeapply <path/to/key.txt>
 ```
+
 To delete all configurations except for the namespace you can also use the `kubeapply`.
 ```bash
 ./kubeapply -d
 ```
+
+To access prometheus, you have to portforward.
+```bash
+kubectl -n prometheus port-forward kube-prometheus-stack-<rest-of-grafan-pod-name> 3000
+```
+> Note to myself: This is exposed with nginx on port 3030 which redirects to localhost:3000
 
 ## Applications
 Here is the source code for apps used in this exercise.
 - [todo-app](../../todo-app)
 - [todo-backend](../../todo-backend)
 - [todo-script](../../todo-script)
+
+# Descriptions
+Here are some details what was done in exercises.
+## 2.10
+- [Backend app](../../todo-backend) was modified to write log messages to stdout.
+- Prometheus stack was deployed according to course material
+- Loki stack was deployed according to course material
+- Nginx was set up as reverse proxy to access the localhost portforward of kubernetes

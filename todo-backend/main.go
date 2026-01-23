@@ -15,6 +15,7 @@ import (
 
 
 func main() {
+	log.SetOutput(os.Stdout)
 	dbUser := os.Getenv("POSTGRES_USER")
 	dbPassword := os.Getenv("POSTGRES_PASSWORD")
 	dbHost := os.Getenv("POSTGRES_HOST")
@@ -59,6 +60,7 @@ func main() {
 		todo := c.PostForm("todo")
 		todo = strings.TrimSpace(todo)
 		if len(todo) > 140 || len(todo) == 0 {
+			log.Print(fmt.Sprintf("Blocked too long todo: %s", todo))
 			c.JSON(400, gin.H{"error": "invalid-length"})
 			return
 		}
@@ -68,6 +70,7 @@ func main() {
 			c.JSON(500, gin.H{"error": err})
 			return
 		}
+		log.Print(fmt.Sprintf("Created todo: %s", todo))
 		c.JSON(200, todo)
 	})
 
