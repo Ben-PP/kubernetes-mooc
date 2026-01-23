@@ -21,3 +21,4 @@ To delete all configurations except for the namespace you can also use the `kube
 Here is the source code for apps used in this exercise.
 - [todo-app](../../todo-app)
 - [todo-backend](../../todo-backend)
+- [todo-script](../../todo-script)
