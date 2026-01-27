@@ -29,6 +29,18 @@ func initDB(db *sql.DB) {
 	}
 }
 
+func getCount(db *sql.DB) (int, error) {
+	var count int
+	err := db.QueryRow("SELECT count FROM pings;").Scan(&count)
+	if err != nil && err != sql.ErrNoRows {
+		return 0, err
+	}
+	if err == sql.ErrNoRows {
+		count = 0
+	}
+	return count, nil
+}
+
 func main() {
 	pgHost := os.Getenv("POSTGRES_HOST")
 	pgPort := os.Getenv("POSTGRES_PORT")
@@ -47,6 +59,7 @@ func main() {
 		dbLocal, err := sql.Open("postgres", connStr)
 		if err == nil {
 			db = dbLocal
+			defer db.Close()
 			break
 		}
 		fmt.Printf("Error: %s\n", err)
@@ -75,13 +88,20 @@ func main() {
   	    c.HTML(http.StatusOK, "pingpong.tmpl", count+1)
   	})
 	router.GET("/pings", func(c *gin.Context) {
-		var count int
-		err := db.QueryRow("SELECT count FROM pings;").Scan(&count)
-		if err != nil && err != sql.ErrNoRows {
+		count, err := getCount(db)
+		if err != nil {
 			c.JSON(500, gin.H{"error": err})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"pings": count})
+	})
+	router.GET("/healthz", func(c *gin.Context) {
+		_, err := getCount(db)
+		if err != nil {
+			c.JSON(500, gin.H{"alive": 0})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"alive": 1})
 	})
   	router.Run()
 }

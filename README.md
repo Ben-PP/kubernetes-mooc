@@ -41,3 +41,7 @@ Repo for DevOps with Kubernetes course from University of Helsinki MOOC course.
 - [2.8](https://github.com/Ben-PP/kubernetes-mooc/tree/2.8/manifests/the-project)
 - [2.9](https://github.com/Ben-PP/kubernetes-mooc/tree/2.9/manifests/the-project)
 - [2.10](https://github.com/Ben-PP/kubernetes-mooc/tree/2.10/manifests/the-project)
+
+## Chapter 5
+- [4.1](https://github.com/Ben-PP/kubernetes-mooc/tree/4.1/manifests/exercises)
+

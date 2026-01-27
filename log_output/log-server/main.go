@@ -67,5 +67,13 @@ func main() {
 		}
 		c.HTML(http.StatusOK, "index.tmpl", data)
 	})
+	router.GET("/healthz", func(c *gin.Context) {
+		_, err := pongClient.Pings()
+		if err != nil {
+			c.JSON(503, gin.H{"error": err})
+			return
+		}
+		c.JSON(200, gin.H{"status": "ok"})
+	})
 	router.Run()
 }

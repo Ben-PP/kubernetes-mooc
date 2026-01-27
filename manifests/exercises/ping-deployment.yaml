@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: benpp/ping-pong:2.7
+          image: benpp/ping-pong:4.1
           env:
             - name: POSTGRES_PASSWORD
               value: "supersecretpassword"
@@ -23,3 +23,9 @@ spec:
               value: "postgres-svc"
             - name: POSTGRES_PORT
               value: "5432"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8080

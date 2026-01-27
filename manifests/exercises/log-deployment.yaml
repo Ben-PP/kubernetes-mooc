@@ -30,7 +30,7 @@ spec:
             - name: logs-dir
               mountPath: /app/logs
         - name: log-server
-          image: benpp/log-server:2.5
+          image: benpp/log-server:4.1
           env:
             - name: PINGPONG_URL
               value: "http://ping-pong-svc:2345"
@@ -45,3 +45,9 @@ spec:
             - name: config
               mountPath: /app/data
               readOnly: true
+          readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8080
