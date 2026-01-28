@@ -73,6 +73,12 @@ func main() {
 		log.Print(fmt.Sprintf("Created todo: %s", todo))
 		c.JSON(200, todo)
 	})
+	router.GET("/healthz", func(c *gin.Context) {
+		if err := db.Ping(dbClient); err != nil {
+			c.JSON(500, gin.H{"error": err})
+		}
+		c.JSON(200, gin.H{"status": "ok"})
+	})
 
 	router.Run()
 }

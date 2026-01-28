@@ -41,3 +41,10 @@ func Init(client *sql.DB) error {
 	}
 	return nil
 }
+
+func Ping(client *sql.DB) error {
+	if err := client.Ping(); err != nil {
+		return err
+	}
+	return nil
+}
