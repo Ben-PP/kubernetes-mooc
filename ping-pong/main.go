@@ -68,7 +68,6 @@ func main() {
 		tries += 1
 	}
 	initDB(db)
-
   	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.tmpl")
   	router.GET("/", func(c *gin.Context) {
