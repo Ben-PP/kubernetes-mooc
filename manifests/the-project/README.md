@@ -37,3 +37,8 @@ Here are some details what was done in exercises.
 - Prometheus stack was deployed according to course material
 - Loki stack was deployed according to course material
 - Nginx was set up as reverse proxy to access the localhost portforward of kubernetes
+## 4.3
+PromQL query for exercise 4.3 is here.
+```
+kube_statefulset_created{namespace="prometheus"}
+```
