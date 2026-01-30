@@ -35,7 +35,7 @@ func Connect(user string, password string, host string, port string, database st
 }
 
 func Init(client *sql.DB) error {
-	_, err := client.Query("CREATE TABLE IF NOT EXISTS todos (id TEXT PRIMARY KEY, content TEXT NOT NULL);")
+	_, err := client.Query("CREATE TABLE IF NOT EXISTS todos (id TEXT PRIMARY KEY, content TEXT NOT NULL, done BOOLEAN NOT NULL DEFAULT FALSE);")
 	if err != nil {
 		return err
 	}

@@ -13,6 +13,15 @@ import (
 	"github.com/google/uuid"
 )
 
+type DoneBody struct {
+	IsDone	bool	`json:"is_done"`
+}
+
+type Todo struct {
+	ID		string	`json:"id"`
+	IsDone	bool	`json:"is_done"`
+	Content	string	`json:"content"`
+}
 
 func main() {
 	log.SetOutput(os.Stdout)
@@ -39,20 +48,20 @@ func main() {
 	router.Use(cors.Default())
 
 	router.GET("/todos", func(c *gin.Context) {
-		rows, err := dbClient.Query("SELECT content FROM todos;")
+		rows, err := dbClient.Query("SELECT * FROM todos;")
 		if err != nil {
 			c.JSON(500, gin.H{"error": fmt.Sprintf("Failed to query todos: %s", err)})
 			return
 		}
 		defer rows.Close()
-		var todos []string
+		var todos []Todo
 		for rows.Next() {
-			var content string
-			if err := rows.Scan(&content); err != nil {
+			var t Todo
+			if err := rows.Scan(&t.ID, &t.Content, &t.IsDone); err != nil {
 				c.JSON(500, gin.H{"error": fmt.Sprintf("Failed to scan rows: %s", err)})
 				return
 			}
-			todos = append(todos, content)
+			todos = append(todos, t)
 		}
 		c.JSON(http.StatusOK, todos)
 	})
@@ -72,6 +81,24 @@ func main() {
 		}
 		log.Print(fmt.Sprintf("Created todo: %s", todo))
 		c.JSON(200, todo)
+	})
+	router.PUT("/todos/:id", func(c *gin.Context) {
+		var body DoneBody
+		if err := c.ShouldBind(&body); err != nil {
+			fmt.Println(err)
+			c.JSON(400, gin.H{"error":"malformed body"})
+			return
+		}
+		fmt.Println(body.IsDone)
+		id := c.Param("id")
+		fmt.Println(id)
+		_, err := dbClient.Query("UPDATE todos SET done=$1 WHERE id=$2", body.IsDone, id)
+		if err != nil {
+			log.Print(err)
+			c.JSON(500, gin.H{"error": err})
+			return
+		}
+		c.JSON(200, gin.H{})
 	})
 	router.GET("/healthz", func(c *gin.Context) {
 		if err := db.Ping(dbClient); err != nil {

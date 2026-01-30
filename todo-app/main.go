@@ -14,7 +14,8 @@ import (
 
 type PageData struct {
 	ImageURI 		template.URL
-	Todos	 		[]string
+	Todos	 		[]todos.Todo
+	DoneTodos 		[]todos.Todo
 	TodoBackendURL	string
 }
 
@@ -48,13 +49,23 @@ func main() {
 			c.HTML(http.StatusInternalServerError, "internal-error.tmpl", err)
 			return
 		}
-		todos, err := todoClient.GetAll()
+		allTodos, err := todoClient.GetAll()
 		if err != nil {
 			panic("Failed to fetch todos")
 		}
+		doneTodos := []todos.Todo{}
+		waitingTodos := []todos.Todo{}
+		for _, todo := range allTodos {
+			if todo.IsDone {
+				doneTodos = append(doneTodos, todo)
+			} else {
+				waitingTodos = append(waitingTodos, todo)
+			}
+		}
 		data := PageData{
 			ImageURI: template.URL(imageUri),
-			Todos: todos,
+			Todos: waitingTodos,
+			DoneTodos: doneTodos,
 			TodoBackendURL: backendURL,
 		}
 		c.HTML(http.StatusOK, "index.tmpl", data) 

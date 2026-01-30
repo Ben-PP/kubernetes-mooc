@@ -38,9 +38,37 @@
 			}
 		})
 		</script>
+		<h2>Todos</h2>
 		<ul>
 			{{ range .Todos }}
-				<li>{{ . }}</li>
+				<li>{{ .Content }}<button type="button" id="{{ .ID }}">Mark as done</button></li>
+				<script>
+				document.getElementById('{{ .ID }}').addEventListener('click', async () => {
+					const btn = document.getElementById('{{ .ID }}')
+					btn.disabled = true
+					btn.textContent = 'Sending...'
+					try {
+						const url = '{{ $.TodoBackendURL }}/todos/{{ .ID }}'
+						const resp = await fetch(url, {
+							method: 'PUT',
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({is_done: true})
+						})
+						if (resp.ok) {
+							location.reload()
+						}
+					} catch (err) {
+						// Should do something here also
+						console.log('',err)
+					}
+				})
+				</script>
+			{{ end }}
+		</ul>
+		<h2>Done</h2>
+		<ul>
+			{{ range .DoneTodos }}
+				<li>{{ .Content }}</li>
 			{{ end }}
 		</ul>
 		<p>DevOps with Kubernetes 2025</p>
